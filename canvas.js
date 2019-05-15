@@ -19,7 +19,7 @@ const rand = (min, max) => {
 const block = {
     x: 0,
     y: 0,
-    type: "T",
+    type: "L",
     matrix() {
         if (this.type === "T") {
             return [
@@ -91,6 +91,34 @@ function mergeMatrix(area, block) {
     }
 }
 
+function randomBlock() {
+    switch (rand(1, 7)) {
+        case 1:
+            return "T"
+            break;
+        case 2:
+            return "L"
+            break;
+        case 3:
+            return "J"
+            break;
+        case 4:
+            return "Z"
+            break;
+        case 5:
+            return "S"
+            break;
+        case 6:
+            return "I"
+            break;
+        case 7:
+            return "O"
+            break;
+
+
+    }
+}
+
 function colide(area, block) {
     const blockMatrix = block.matrix();
     for (let y = 0; y < blockMatrix.length; y++) {
@@ -146,6 +174,7 @@ window.addEventListener("keydown", function (event) {
     if (colide(area, block)) {
         block.y--;
         mergeMatrix(area, block);
+        block.type = randomBlock();
         block.y = 0;
         block.x = 5;
     }
