@@ -153,6 +153,7 @@ setInterval(() => {
 }, speed);
 
 
+    drowMatrix(block.matrix(), block.x, block.y);
 window.addEventListener("keydown", function (event) {
     if (event.keyCode == 40) {
         // down
@@ -170,7 +171,6 @@ window.addEventListener("keydown", function (event) {
     ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = "red";
-    drowMatrix(block.matrix(), block.x, block.y);
     if (colide(area, block)) {
         block.y--;
         mergeMatrix(area, block);
@@ -179,5 +179,6 @@ window.addEventListener("keydown", function (event) {
         block.x = 5;
     }
 
+    drowMatrix(block.matrix(), block.x, block.y);
     drowMatrix(area);
 });
