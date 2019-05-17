@@ -6,6 +6,8 @@ ctx.canvas.height = 600;
 ctx.canvas.width = 360;
 let speed = 500;
 const bok = 30;
+let score = 0;
+let bestScore = 0;
 const width = ctx.canvas.width / bok;
 const height = ctx.canvas.height / bok;
 const rand = (min, max) => {
@@ -208,6 +210,9 @@ function cutRow() {
         if (matrixFullRow(area[x])) {
             area.splice(x, 1);
             area.unshift(new Array(area[0].length).fill(0))
+
+            score++;
+            scoreDiv.innerHTML = "Score: " + score;
         }
 
 
@@ -225,6 +230,12 @@ function reset() {
     block.x = 5;
     if (colide(area, block)) {
         area.forEach(row => row.fill(0));
+        if (score > bestScore) {
+            bestScore = score;
+        }
+        bestScoreDiv.innerHTML = "Best Score: " + bestScore;
+        score = 0;
+        scoreDiv.innerHTML = "Score: " + score;
     }
 }
 
@@ -263,7 +274,7 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 drowMatrix(block.matrix, block.x, block.y);
 drowMatrix(area);
-
+scoreDiv.innerHTML = "Score: " + score;
 frame();
 block.matrixCreator();
 window.addEventListener("keydown", function (event) {
